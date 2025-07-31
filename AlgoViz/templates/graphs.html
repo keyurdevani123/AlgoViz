@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Traversals - DSA Visualizer</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <i data-feather="arrow-left" class="feather-sm me-2"></i>
+                    DSA Visualizer
+                </a>
+                <span class="navbar-text">
+                    🔗 Graph Traversals
+                </span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-0">
+            <div class="row g-0" style="height: calc(100vh - 76px);">
+                <!-- Controls Panel -->
+                <div class="col-lg-3 border-end bg-body-tertiary">
+                    <div class="p-4">
+                        <h5 class="mb-4">Graph Controls</h5>
+                        
+                        <!-- Algorithm Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Select Algorithm</label>
+                            <select id="algorithmSelect" class="form-select">
+                                <option value="bfs">Breadth-First Search (BFS)</option>
+                                <option value="dfs">Depth-First Search (DFS)</option>
+                            </select>
+                        </div>
+
+                        <!-- Graph Input -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Graph Configuration</label>
+                            <div class="mb-2">
+                                <label class="form-label small">Number of Nodes</label>
+                                <input type="number" id="nodesInput" class="form-control" value="5" min="3" max="8">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">Edges (format: 0-1,1-2,2-3)</label>
+                                <input type="text" id="edgesInput" class="form-control" 
+                                       value="0-1,0-2,1-3,2-3,3-4" placeholder="u-v,u-v,...">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label small">Start Node</label>
+                                <input type="number" id="startNodeInput" class="form-control" value="0" min="0">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button id="generateGraphBtn" class="btn btn-outline-secondary btn-sm">
+                                    Generate Random Graph
+                                </button>
+                                <button id="buildGraphBtn" class="btn btn-outline-primary btn-sm">
+                                    Build Graph
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Animation Controls -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Animation Speed</label>
+                            <input type="range" id="speedSlider" class="form-range" min="1" max="10" value="5">
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>Slow</span>
+                                <span>Fast</span>
+                            </div>
+                        </div>
+
+                        <!-- Control Buttons -->
+                        <div class="d-grid gap-2 mb-4">
+                            <button id="startBtn" class="btn btn-primary">
+                                <i data-feather="play" class="feather-sm me-1"></i>
+                                Start Traversal
+                            </button>
+                            <div class="btn-group" role="group">
+                                <button id="pauseBtn" class="btn btn-outline-secondary" disabled>
+                                    <i data-feather="pause" class="feather-sm"></i>
+                                </button>
+                                <button id="stepBtn" class="btn btn-outline-secondary" disabled>
+                                    <i data-feather="skip-forward" class="feather-sm"></i>
+                                </button>
+                                <button id="resetBtn" class="btn btn-outline-secondary">
+                                    <i data-feather="refresh-cw" class="feather-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Data Structure Visualization -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0" id="dataStructureTitle">Queue (BFS)</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="dataStructure" class="small font-monospace">
+                                    <div class="text-muted">Start traversal to see queue/stack</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Complexity Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">Complexity Analysis</h6>
+                            </div>
+                            <div class="card-body small">
+                                <div class="mb-2">
+                                    <strong>Time Complexity:</strong>
+                                    <span class="badge bg-success ms-1">O(V + E)</span>
+                                </div>
+                                <div>
+                                    <strong>Space Complexity:</strong>
+                                    <span class="badge bg-info ms-1">O(V)</span>
+                                </div>
+                                <div class="mt-2 text-muted">
+                                    <small>where V = vertices, E = edges</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Area -->
+                <div class="col-lg-6">
+                    <div class="p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Graph Visualization</h5>
+                            <div class="text-muted small">
+                                Step: <span id="currentStep">0</span> / <span id="totalSteps">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Canvas for graph visualization -->
+                        <div class="border rounded bg-body" style="height: 400px;">
+                            <canvas id="graphCanvas" class="w-100 h-100"></canvas>
+                        </div>
+
+                        <!-- Traversal Order -->
+                        <div class="mt-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Traversal Order</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="traversalOrder" class="font-monospace">
+                                        Build a graph and start traversal to see the order
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current Action Display -->
+                        <div class="mt-3">
+                            <div class="alert alert-info mb-0" role="alert">
+                                <strong>Current Action:</strong>
+                                <span id="currentAction">Build a graph and select a traversal algorithm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pseudocode Panel -->
+                <div class="col-lg-3 border-start bg-body-tertiary">
+                    <div class="p-4 h-100">
+                        <h5 class="mb-4">Pseudocode</h5>
+                        <div class="pseudocode-container">
+                            <pre id="pseudocodeDisplay" class="small"><code>// BFS Algorithm
+function BFS(graph, start):
+    queue = [start]
+    visited = set()
+    
+    while queue is not empty:
+        current = queue.dequeue()
+        if current not in visited:
+            visited.add(current)
+            for neighbor in graph[current]:
+                if neighbor not in visited:
+                    queue.enqueue(neighbor)</code></pre>
+                        </div>
+                        
+                        <!-- Algorithm Comparison -->
+                        <div class="mt-4">
+                            <h6>Algorithm Comparison</h6>
+                            <div class="small">
+                                <div class="mb-3">
+                                    <strong>BFS (Breadth-First):</strong>
+                                    <ul class="list-unstyled mt-1 text-muted">
+                                        <li>• Uses Queue (FIFO)</li>
+                                        <li>• Explores level by level</li>
+                                        <li>• Finds shortest path</li>
+                                        <li>• Good for unweighted graphs</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>DFS (Depth-First):</strong>
+                                    <ul class="list-unstyled mt-1 text-muted">
+                                        <li>• Uses Stack (LIFO)</li>
+                                        <li>• Explores deeply first</li>
+                                        <li>• Uses less memory</li>
+                                        <li>• Good for pathfinding</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="mt-4">
+                            <h6>Legend</h6>
+                            <div class="legend-items small">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="legend-color bg-primary me-2"></div>
+                                    <span>Current node</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="legend-color bg-success me-2"></div>
+                                    <span>Visited node</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="legend-color bg-warning me-2"></div>
+                                    <span>In queue/stack</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="legend-color bg-secondary me-2"></div>
+                                    <span>Unvisited node</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/graphs.js') }}"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

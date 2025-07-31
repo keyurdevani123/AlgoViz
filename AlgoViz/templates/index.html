@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Visualizer - Interactive Algorithm Explorer</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <header class="main-header text-center">
+            <div class="container">
+                <h1>DSA Visualizer</h1>
+                <p class="lead">Interactive Algorithm Explorer</p>
+                <p class="subtitle">Understand core algorithmic concepts through live visual animations and real-time pseudocode</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-5">
+            <div class="row g-4">
+                <!-- Sorting Algorithms -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 algorithm-card">
+                        <div class="card-body text-center">
+                            <div class="card-icon">
+                                <i data-feather="bar-chart-2"></i>
+                            </div>
+                            <h5 class="card-title">Sorting Algorithms</h5>
+                            <p class="card-text">Visual simulation with step-by-step operations</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>• Bubble Sort</li>
+                                <li>• Selection Sort</li>
+                                <li>• Insertion Sort</li>
+                                <li>• Merge Sort</li>
+                                <li>• Quick Sort</li>
+                            </ul>
+                            <div class="features mb-3">
+                                <span class="badge bg-secondary me-1">Live Comparisons</span>
+                                <span class="badge bg-secondary me-1">Swap Animations</span>
+                            </div>
+                            <div class="complexity-info mb-3">
+                                <span class="complexity-badge complexity-time">Time: O(n²) - O(n log n)</span>
+                                <span class="complexity-badge complexity-space">Space: O(1) - O(n)</span>
+                            </div>
+                            <a href="{{ url_for('sorting') }}" class="btn btn-primary w-100">
+                                Explore Sorting
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tree Traversals -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 algorithm-card">
+                        <div class="card-body text-center">
+                            <div class="card-icon">
+                                <i data-feather="git-branch"></i>
+                            </div>
+                            <h5 class="card-title">Tree Traversals</h5>
+                            <p class="card-text">Visualize traversal paths on binary trees</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>• Inorder Traversal</li>
+                                <li>• Preorder Traversal</li>
+                                <li>• Postorder Traversal</li>
+                                <li>• Custom Tree Input</li>
+                            </ul>
+                            <div class="features mb-3">
+                                <span class="badge bg-secondary me-1">Node Visits</span>
+                                <span class="badge bg-secondary me-1">Call Stack</span>
+                            </div>
+                            <div class="complexity-info mb-3">
+                                <span class="complexity-badge complexity-time">Time: O(n)</span>
+                                <span class="complexity-badge complexity-space">Space: O(h)</span>
+                            </div>
+                            <a href="{{ url_for('trees') }}" class="btn btn-primary w-100">
+                                Explore Trees
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recursion Examples -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 algorithm-card">
+                        <div class="card-body text-center">
+                            <div class="card-icon">
+                                <i data-feather="repeat"></i>
+                            </div>
+                            <h5 class="card-title">Recursion Examples</h5>
+                            <p class="card-text">Dynamic visualization of recursive logic</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>• Factorial</li>
+                                <li>• Fibonacci</li>
+                                <li>• Tower of Hanoi</li>
+                                <li>• Reverse String</li>
+                            </ul>
+                            <div class="features mb-3">
+                                <span class="badge bg-secondary me-1">Call Stack</span>
+                                <span class="badge bg-secondary me-1">Return Values</span>
+                            </div>
+                            <div class="complexity-info mb-3">
+                                <span class="complexity-badge complexity-time">Time: O(n) - O(2ⁿ)</span>
+                                <span class="complexity-badge complexity-space">Space: O(n)</span>
+                            </div>
+                            <a href="{{ url_for('recursion') }}" class="btn btn-primary w-100">
+                                Explore Recursion
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graph Traversals -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 algorithm-card">
+                        <div class="card-body text-center">
+                            <div class="card-icon">
+                                <i data-feather="share-2"></i>
+                            </div>
+                            <h5 class="card-title">Graph Traversals</h5>
+                            <p class="card-text">Understand BFS and DFS algorithms</p>
+                            <ul class="list-unstyled small text-muted mb-3">
+                                <li>• Breadth-First Search</li>
+                                <li>• Depth-First Search</li>
+                                <li>• Custom Graphs</li>
+                                <li>• Random Generation</li>
+                            </ul>
+                            <div class="features mb-3">
+                                <span class="badge bg-secondary me-1">Visit Order</span>
+                                <span class="badge bg-secondary me-1">Queue/Stack</span>
+                            </div>
+                            <div class="complexity-info mb-3">
+                                <span class="complexity-badge complexity-time">Time: O(V + E)</span>
+                                <span class="complexity-badge complexity-space">Space: O(V)</span>
+                            </div>
+                            <a href="{{ url_for('graphs') }}" class="btn btn-primary w-100">
+                                Explore Graphs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <section class="mt-5 pt-5 border-top">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="h3 mb-4">⚙️ Key Features</h2>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="feature-item">
+                                    <i data-feather="play" class="feather-md text-primary mb-2"></i>
+                                    <h6>Real-time Animation</h6>
+                                    <p class="small text-muted">Step-by-step visualization with play, pause, and speed controls</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-item">
+                                    <i data-feather="code" class="feather-md text-primary mb-2"></i>
+                                    <h6>Live Pseudocode</h6>
+                                    <p class="small text-muted">Synchronized pseudocode highlighting with algorithm execution</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-item">
+                                    <i data-feather="trending-up" class="feather-md text-primary mb-2"></i>
+                                    <h6>Complexity Analysis</h6>
+                                    <p class="small text-muted">Time and space complexity information for each algorithm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack -->
+            <section class="mt-5 pt-5 border-top">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto text-center">
+                        <h2 class="h4 mb-4">Tech Stack</h2>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="tech-item p-3 border rounded">
+                                    <strong>Frontend</strong>
+                                    <div class="small text-muted mt-1">
+                                        HTML5 + CSS3 + JavaScript<br>
+                                        Bootstrap 5 + Canvas API
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="tech-item p-3 border rounded">
+                                    <strong>Backend</strong>
+                                    <div class="small text-muted mt-1">
+                                        Python + Flask<br>
+                                        Algorithm Implementations
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-4 mt-5 border-top text-center text-muted">
+            <p>&copy; 2025 DSA Visualizer. Built with Flask and JavaScript for educational purposes.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Feather icons
+        feather.replace();
+        
+        // Add hover effects to algorithm cards
+        document.querySelectorAll('.algorithm-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

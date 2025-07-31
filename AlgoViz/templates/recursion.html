@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion Examples - DSA Visualizer</title>
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <i data-feather="arrow-left" class="feather-sm me-2"></i>
+                    DSA Visualizer
+                </a>
+                <span class="navbar-text">
+                    <i data-feather="repeat" class="feather-sm me-2"></i>
+                    Recursion Examples
+                </span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <div class="row g-4">
+                <!-- Controls Card -->
+                <div class="col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="card-icon me-3" style="width: 40px; height: 40px; font-size: 1rem;">
+                                    <i data-feather="repeat"></i>
+                                </div>
+                                <h5 class="mb-0">Controls</h5>
+                            </div>
+                            
+                            <!-- Algorithm Selection -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Select Algorithm</label>
+                                <select id="algorithmSelect" class="form-select">
+                                    <option value="factorial">Factorial</option>
+                                    <option value="fibonacci">Fibonacci</option>
+                                    <option value="tower">Tower of Hanoi</option>
+                                    <option value="reverse">Reverse String</option>
+                                </select>
+                            </div>
+
+                            <!-- Parameter Input -->
+                            <div class="mb-4" id="parameterSection">
+                                <label class="form-label fw-semibold" id="parameterLabel">Input Value (n)</label>
+                                <input type="number" id="numberInput" class="form-control mb-2" 
+                                       value="5" min="1" max="10">
+                                <input type="text" id="textInput" class="form-control mb-2" 
+                                       value="hello" style="display: none;">
+                                <div class="small text-muted" id="parameterHelp">
+                                    Enter a number between 1 and 10
+                                </div>
+                            </div>
+
+                            <!-- Animation Controls -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Animation Speed</label>
+                                <input type="range" id="speedSlider" class="form-range" min="1" max="10" value="5">
+                                <div class="d-flex justify-content-between small text-muted">
+                                    <span>Slow</span>
+                                    <span>Fast</span>
+                                </div>
+                            </div>
+
+                            <!-- Control Buttons -->
+                            <div class="d-grid gap-2 mb-4">
+                                <button id="startBtn" class="btn btn-primary">
+                                    <i data-feather="play" class="feather-sm me-1"></i>
+                                    Start Recursion
+                                </button>
+                                <div class="btn-group" role="group">
+                                    <button id="pauseBtn" class="btn btn-outline-secondary" disabled>
+                                        <i data-feather="pause" class="feather-sm"></i>
+                                    </button>
+                                    <button id="stepBtn" class="btn btn-outline-secondary" disabled>
+                                        <i data-feather="skip-forward" class="feather-sm"></i>
+                                    </button>
+                                    <button id="resetBtn" class="btn btn-outline-secondary">
+                                        <i data-feather="rotate-ccw" class="feather-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Complexity Info -->
+                            <div class="card bg-body-secondary border-0">
+                                <div class="card-body p-3">
+                                    <h6 class="card-title">
+                                        <i data-feather="trending-up" class="feather-sm me-2"></i>
+                                        Complexity
+                                    </h6>
+                                    <div id="complexityInfo">
+                                        <div class="complexity-badge complexity-time mb-2">Time: O(n)</div>
+                                        <div class="complexity-badge complexity-space">Space: O(n)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Card -->
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="eye" class="feather-sm me-2"></i>
+                                <h6 class="mb-0" id="algorithmTitle">Factorial Visualization</h6>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <canvas id="recursionCanvas" style="width: 100%; height: 500px; border: none;"></canvas>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="info" class="feather-sm me-2"></i>
+                                <small id="currentAction" class="text-muted">Select an algorithm and click Start to begin</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pseudocode & Stack Card -->
+                <div class="col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="code" class="feather-sm me-2"></i>
+                                <h6 class="mb-0">Pseudocode</h6>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="pseudocode-container" id="pseudocodeContainer" style="height: 200px;">
+                                <pre id="pseudocodeDisplay">function factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n-1)</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <i data-feather="layers" class="feather-sm me-2"></i>
+                                <h6 class="mb-0">Call Stack</h6>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="call-stack-visual" id="callStack" style="height: 250px;">
+                                <div class="text-center text-muted p-3">
+                                    <small>Call stack will appear here during execution</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recursion.js') }}"></script>
+    <script>
+        // Initialize Feather icons and visualizer
+        feather.replace();
+        
+        // Initialize the recursion visualizer
+        let visualizer;
+        document.addEventListener('DOMContentLoaded', function() {
+            visualizer = new RecursionVisualizer();
+        });
+    </script>
+</body>
+</html>

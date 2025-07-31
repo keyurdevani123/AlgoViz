@@ -1,0 +1,578 @@
+/* Custom styles for DSA Visualizer */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+}
+
+/* Header styles */
+.main-header {
+    background: linear-gradient(135deg, var(--bs-primary), var(--bs-info));
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.main-header .lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.main-header .subtitle {
+    font-size: 1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Algorithm cards on home page */
+.algorithm-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    background: var(--bs-body-bg);
+    overflow: hidden;
+}
+
+.algorithm-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.algorithm-card .card-body {
+    padding: 2rem;
+}
+
+.algorithm-card .card-title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.algorithm-card .card-text {
+    color: var(--bs-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.algorithm-card .features {
+    margin-bottom: 1.5rem;
+}
+
+.algorithm-card .features .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+    margin: 0.2rem;
+}
+
+/* Card icons */
+.card-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--bs-primary), var(--bs-info));
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* Complexity badges */
+.complexity-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    margin: 0.1rem;
+}
+
+.complexity-time {
+    background-color: var(--bs-success);
+    color: white;
+}
+
+.complexity-space {
+    background-color: var(--bs-info);
+    color: white;
+}
+
+.algorithm-icon {
+    font-size: 3rem;
+    color: var(--bs-primary);
+}
+
+.feather-lg {
+    width: 48px;
+    height: 48px;
+}
+
+.feather-md {
+    width: 24px;
+    height: 24px;
+}
+
+.feather-sm {
+    width: 16px;
+    height: 16px;
+}
+
+/* Features section */
+.feature-item {
+    text-align: center;
+}
+
+.tech-item {
+    text-align: center;
+    background: var(--bs-body-bg);
+}
+
+/* Visualization specific styles */
+.pseudocode-container {
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.pseudocode-container pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Highlighted pseudocode line */
+.pseudocode-highlight {
+    background-color: var(--bs-warning);
+    color: var(--bs-dark);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Legend colors */
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* Call stack styling */
+.call-stack-item {
+    background: var(--bs-secondary);
+    color: var(--bs-light);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    font-family: monospace;
+}
+
+.call-stack-item.active {
+    background: var(--bs-primary);
+}
+
+/* Data structure visualization */
+.data-structure-item {
+    display: inline-block;
+    background: var(--bs-info);
+    color: var(--bs-light);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 2px;
+    font-family: monospace;
+}
+
+/* Canvas styling */
+canvas {
+    border-radius: 0.375rem;
+}
+
+/* Animation controls */
+.btn-group .btn {
+    flex: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container-fluid .row.g-0 > div {
+        min-height: auto !important;
+    }
+    
+    .pseudocode-container {
+        max-height: 200px;
+    }
+    
+    .algorithm-icon {
+        font-size: 2rem;
+    }
+    
+    .feather-lg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Dark theme adjustments */
+[data-bs-theme="dark"] .algorithm-card {
+    border: 1px solid var(--bs-border-color);
+}
+
+[data-bs-theme="dark"] .pseudocode-container {
+    background: var(--bs-gray-900);
+}
+
+/* Custom scrollbars for dark theme */
+[data-bs-theme="dark"] .pseudocode-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+[data-bs-theme="dark"] .pseudocode-container::-webkit-scrollbar-track {
+    background: var(--bs-gray-800);
+}
+
+[data-bs-theme="dark"] .pseudocode-container::-webkit-scrollbar-thumb {
+    background: var(--bs-gray-600);
+    border-radius: 4px;
+}
+
+[data-bs-theme="dark"] .pseudocode-container::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-gray-500);
+}
+
+/* Array bar styling for sorting visualization */
+.array-bar {
+    transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+/* Tree node styling */
+.tree-node {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* Graph node styling */
+.graph-node {
+    transition: fill 0.3s ease, stroke 0.3s ease, r 0.3s ease;
+}
+
+.graph-edge {
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+/* Recursion call visualization */
+.recursion-call {
+    transition: all 0.3s ease;
+}
+
+/* Tower of Hanoi visualization */
+.hanoi-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 250px;
+    padding: 20px;
+    background: var(--bs-body-bg);
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+.hanoi-rod {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.hanoi-rod-label {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+}
+
+.hanoi-rod-pole {
+    width: 8px;
+    height: 180px;
+    background: var(--bs-secondary);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.hanoi-rod-base {
+    width: 100px;
+    height: 15px;
+    background: var(--bs-dark);
+    border-radius: 4px;
+}
+
+.hanoi-disk {
+    height: 20px;
+    border-radius: 10px;
+    margin: 2px 0;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hanoi-disk:nth-child(1) { background: #e74c3c; width: 80px; }
+.hanoi-disk:nth-child(2) { background: #f39c12; width: 70px; }
+.hanoi-disk:nth-child(3) { background: #f1c40f; width: 60px; }
+.hanoi-disk:nth-child(4) { background: #2ecc71; width: 50px; }
+.hanoi-disk:nth-child(5) { background: #3498db; width: 40px; }
+
+/* Recursion tree visualization */
+.recursion-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.tree-level {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    gap: 20px;
+}
+
+.tree-node {
+    background: var(--bs-primary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tree-node.active {
+    background: var(--bs-warning);
+    color: var(--bs-dark);
+    transform: scale(1.1);
+}
+
+.tree-node.completed {
+    background: var(--bs-success);
+}
+
+.tree-node.base-case {
+    background: var(--bs-info);
+}
+
+/* Call stack visualization */
+.call-stack-visual {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5px;
+    padding: 15px;
+    background: var(--bs-body-bg);
+    border-radius: 1rem;
+    min-height: 200px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.call-item {
+    background: var(--bs-secondary);
+    color: var(--bs-light);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    min-width: 150px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.call-item.active {
+    background: var(--bs-primary);
+    transform: scale(1.05);
+}
+
+.call-item.returning {
+    background: var(--bs-success);
+}
+
+.call-item::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid var(--bs-secondary);
+    opacity: 0.7;
+}
+
+.call-item.active::after {
+    border-bottom-color: var(--bs-primary);
+}
+
+/* String reversal visualization */
+.string-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.string-chars {
+    display: flex;
+    gap: 5px;
+}
+
+.string-char {
+    width: 40px;
+    height: 40px;
+    background: var(--bs-light);
+    border: 2px solid var(--bs-secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.string-char.processing {
+    background: var(--bs-warning);
+    border-color: var(--bs-warning);
+    color: var(--bs-dark);
+}
+
+.string-char.processed {
+    background: var(--bs-success);
+    border-color: var(--bs-success);
+    color: white;
+}
+
+/* Step indicator */
+.step-indicator {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    border: 2px solid var(--bs-border-color);
+    border-top: 2px solid var(--bs-primary);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error state */
+.error-message {
+    color: var(--bs-danger);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Success state */
+.success-message {
+    color: var(--bs-success);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Utility classes */
+.font-monospace {
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+.text-nowrap {
+    white-space: nowrap !important;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+/* Custom badge colors */
+.badge.bg-complexity {
+    background-color: var(--bs-info) !important;
+}
+
+/* Hover effects */
+.hover-lift:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .algorithm-card {
+        border: 2px solid var(--bs-border-color);
+    }
+    
+    .legend-color {
+        border: 1px solid var(--bs-border-color);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .algorithm-card,
+    .array-bar,
+    .tree-node,
+    .graph-node,
+    .graph-edge,
+    .recursion-call {
+        transition: none;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+}
